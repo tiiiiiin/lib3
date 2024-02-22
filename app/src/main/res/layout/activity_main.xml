@@ -67,6 +67,7 @@
         android:layout_below="@+id/user_field"
         android:layout_marginHorizontal="130dp"
         android:layout_marginTop="30dp"
+        android:onClick="trans_btn"
         android:text="@string/trans_btn"
         android:textAlignment="center"
         android:textSize="34sp" />

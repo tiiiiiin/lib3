@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity2">
+
     <Button
         android:id="@+id/book"
         android:layout_width="match_parent"
@@ -13,9 +14,10 @@
         android:layout_marginTop="80sp"
         android:ems="10"
         android:fontFamily="@font/montserrat_bold"
+        android:onClick="book"
         android:text="@string/book_btn"
         android:textAlignment="center"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
     <Button
         android:id="@+id/readers"
         android:layout_width="match_parent"
