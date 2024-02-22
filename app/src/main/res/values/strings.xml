@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">lib3</string>
+    <string name="logo">Утопия</string>
+    <string name="authorize">Авторизация</string>
+    <string name="library">Библиотека</string>
+    <string name="hint_user_field">Введите ФИО</string>
+    <string name="trans_btn">Далее</string>
+    <string name="book_btn">информация о книгах</string>
+    <string name="reader_btn">информация о читателях</string>
+    <string name="going_btn">Выданные книги</string>
 </resources>
