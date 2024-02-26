@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/delete_all"
-        android:tile="deleteAll"
+        android:title="delete All"
         android:icon="@drawable/ic_delete"
         app:showAsAction="always"
-        android:title="TODO" />
+         />
 
 </menu>
