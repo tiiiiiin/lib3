@@ -81,4 +81,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             mainLayout.setAnimation(translate_anim);
         }
     }
+    public void updateData(ArrayList<String> ids, ArrayList<String> titles, ArrayList<String> authors, ArrayList<String> counts) {
+        this.book_id.clear();
+        this.book_title.clear();
+        this.book_author.clear();
+        this.book_count.clear();
+
+        this.book_id.addAll(ids);
+        this.book_title.addAll(titles);
+        this.book_author.addAll(authors);
+        this.book_count.addAll(counts);
+
+        notifyDataSetChanged();
+    }
 }

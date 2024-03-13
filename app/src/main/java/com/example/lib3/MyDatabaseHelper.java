@@ -95,4 +95,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
          SQLiteDatabase db = this.getWritableDatabase();
          db.execSQL("DELETE FROM "+ TABLE_NAME);
     }
+    public Cursor searchData(String query) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {COLUMN_ID, COLUMN_TITLE, COLUMN_AUTHOR, COLUMN_COUNT};
+        String selection = COLUMN_TITLE + " LIKE '%" + query + "%' OR " + COLUMN_AUTHOR + " LIKE '%" + query + "%'";
+        Cursor cursor = db.query(TABLE_NAME, columns, selection, null, null, null, null);
+        return cursor;
+    }
 }

@@ -10,10 +10,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,6 +59,38 @@ public class addBook extends AppCompatActivity {
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(addBook.this));
 
+        Button searchButton = findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performSearch();
+            }
+        });
+
+    }
+    private void performSearch() {
+        EditText searchEditText = findViewById(R.id.search_edit_text);
+        String searchText = searchEditText.getText().toString();
+
+        ArrayList<String> searchedBookId = new ArrayList<>();
+        ArrayList<String> searchedBookTitle = new ArrayList<>();
+        ArrayList<String> searchedBookAuthor = new ArrayList<>();
+        ArrayList<String> searchedBookCount = new ArrayList<>();
+
+        Cursor cursor = myDB.searchData(searchText); // Выполняем поиск в базе данных
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No matching data found", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                searchedBookId.add(cursor.getString(0));
+                searchedBookTitle.add(cursor.getString(1));
+                searchedBookAuthor.add(cursor.getString(2));
+                searchedBookCount.add(cursor.getString(3));
+            }
+            // Обновляем адаптер RecyclerView с результатами поиска
+            customAdapter.updateData(searchedBookId, searchedBookTitle, searchedBookAuthor, searchedBookCount);
+            Log.d("SearchActivity", "Search results: " + searchedBookTitle.toString()); // Отладочный вывод
+        }
     }
 
     @Override
