@@ -17,4 +17,6 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = new Intent(this, addBook.class);
         startActivity(intent);
     }
+
+    //public void client(View view) { Intent intent = new Intent( this, addClient.class); startActivity(intent);
 }

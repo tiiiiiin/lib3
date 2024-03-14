@@ -18,18 +18,20 @@
         android:text="@string/book_btn"
         android:textAlignment="center"
         android:textSize="24sp" />
+
     <Button
         android:id="@+id/readers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/book"
         android:layout_marginHorizontal="60sp"
         android:layout_marginTop="130sp"
         android:ems="10"
-        android:layout_below="@+id/book"
         android:fontFamily="@font/montserrat_bold"
+        android:onClick="client"
         android:text="@string/reader_btn"
         android:textAlignment="center"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
     <Button
         android:id="@+id/going"
         android:layout_width="match_parent"
