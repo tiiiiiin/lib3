@@ -18,5 +18,8 @@ public class MainActivity2 extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //public void client(View view) { Intent intent = new Intent( this, addClient.class); startActivity(intent);
+    public void client(View view) {
+        Intent intent = new Intent( this, activity_add_client.class);
+        startActivity(intent);
+    }
 }
