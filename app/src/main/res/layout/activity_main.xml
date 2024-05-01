@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#FFF4B3">
 
     <TextView
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="@string/logo"
+        android:fontFamily="@font/alatsi"
+        android:text="Utopia"
         android:textAlignment="center"
-        android:textColor="@color/titlename"
+        android:textColor="#A3002D"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +30,9 @@
         android:layout_marginTop="0dp"
         android:ems="10"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/library"
+        android:text="Library"
         android:textAlignment="center"
+        android:textColor="#920041"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -44,8 +46,9 @@
         android:layout_marginTop="124dp"
         android:ems="10"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/authorize"
+        android:text="Авторизация"
         android:textAlignment="center"
+        android:textColor="#773D31"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -59,21 +62,22 @@
         android:layout_marginTop="3dp"
         android:ems="10"
         android:fontFamily="@font/montserrat_bold"
-        android:hint="@string/hint_user_field"
+        android:hint="введите имя"
         android:inputType="text"
         android:textAlignment="center"
+        android:textColor="#920041"
         android:textSize="34sp" />
 
     <Button
         android:id="@+id/trans_btn"
-        android:layout_width="213dp"
-        android:layout_height="81dp"
+        android:layout_width="190dp"
+        android:layout_height="79dp"
         android:layout_below="@+id/user_field"
         android:layout_marginHorizontal="130dp"
         android:layout_marginTop="22dp"
         android:onClick="trans_btn"
         android:text="@string/trans_btn"
         android:textAlignment="center"
-        android:textSize="34sp" />
+        android:textSize="28sp" />
 
 </RelativeLayout>
