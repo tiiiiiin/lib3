@@ -2,6 +2,7 @@ package com.example.lib3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,12 @@ public class AddActivity extends AppCompatActivity {
                 myDB.addBook(title_input.getText().toString().trim(),
                         author_input.getText().toString().trim(),
                         Integer.valueOf(count_input.getText().toString().trim()));
+
+                // Добавляем setResult после добавления книги в базу данных
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+
+                finish(); // Завершаем активность после добавления книги
             }
         });
 

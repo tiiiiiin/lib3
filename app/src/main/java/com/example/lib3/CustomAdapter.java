@@ -22,7 +22,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private ArrayList book_id, book_title, book_author, book_count;
 
     Animation translate_anim;
-    CustomAdapter(Activity activity, Context context, ArrayList book_id, ArrayList book_title, ArrayList book_author,
+    CustomAdapter(Activity activity,
+                  Context context,
+                  ArrayList book_id,
+                  ArrayList book_title,
+                  ArrayList book_author,
                   ArrayList book_count){
         this.activity = activity;
         this.context = context;

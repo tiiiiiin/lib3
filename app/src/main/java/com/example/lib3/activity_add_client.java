@@ -48,6 +48,7 @@ public class activity_add_client extends AppCompatActivity {
         date_of_birth = new ArrayList<>();
         client_email = new ArrayList<>();
 
+        // Здесь добавляем вызов storeDataInArraysClients()
         storeDataInArraysClients();
 
         customAdapterClients = new CustomAdapterClients(activity_add_client.this, this, client_id, name_client,
@@ -65,7 +66,7 @@ public class activity_add_client extends AppCompatActivity {
 
     }
     private void performSearch() {
-        EditText searchEditText = findViewById(R.id.search_edit_text);
+        EditText searchEditText = findViewById(R.id.search_edit_text_Client);
         String searchText = searchEditText.getText().toString();
 
         ArrayList<String> searchedClientId = new ArrayList<>();
@@ -73,7 +74,7 @@ public class activity_add_client extends AppCompatActivity {
         ArrayList<String> searchedClientDate = new ArrayList<>();
         ArrayList<String> searchedClientEmail = new ArrayList<>();
 
-        Cursor cursor = myDB.searchClient(searchText); // Выполняем поиск в базе данных
+        Cursor cursor = myDB.searchClient(searchText);
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "No matching data found", Toast.LENGTH_SHORT).show();
         } else {
@@ -86,6 +87,12 @@ public class activity_add_client extends AppCompatActivity {
             // Обновляем адаптер RecyclerView с результатами поиска
             customAdapterClients.updateData(searchedClientId, searchedClientName, searchedClientDate, searchedClientEmail);
             Log.d("SearchActivity", "Search results: " + searchedClientName.toString()); // Отладочный вывод
+        }
+
+        // Если строка поиска пуста, показываем все данные
+        if (searchText.isEmpty()) {
+            storeDataInArraysClients();
+            customAdapterClients.updateData(client_id, name_client, date_of_birth, client_email);
         }
     }
 
@@ -108,6 +115,7 @@ public class activity_add_client extends AppCompatActivity {
                 date_of_birth.add(cursor.getString(2));
                 client_email.add(cursor.getString(3));
             }
+            Log.d("Data", "Client IDs: " + client_id.toString());
         }
     }
 
