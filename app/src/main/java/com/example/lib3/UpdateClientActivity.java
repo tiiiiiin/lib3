@@ -65,15 +65,15 @@ public class UpdateClientActivity extends AppCompatActivity {
             date_input.setText(data);
             email_input.setText(email);
         }else {
-            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Нет данных.", Toast.LENGTH_SHORT).show();
         }
     }
 
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete " + name + " ?");
-        builder.setMessage("Are you sure you want to delete " + name + " ?" );
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setTitle("Удалить " + name + " ?");
+        builder.setMessage("Вы точно уверены, что хотите удалить " + name + " ?" );
+        builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelperClient myDB = new MyDatabaseHelperClient(UpdateClientActivity.this);
@@ -81,7 +81,7 @@ public class UpdateClientActivity extends AppCompatActivity {
                 finish();
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "Неправильное слово", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Неправильный пароль.", Toast.LENGTH_SHORT).show();
                     user_field.setText(""); // Очищаем поле ввода
                 }
             }

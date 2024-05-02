@@ -51,9 +51,9 @@ public class MyDatabaseHelperClient extends SQLiteOpenHelper {
         cv.put(COLUMN_EMAIL, client_email);
         long result = db.insert(TABLE_NAME, null, cv);
         if(result == -1) {
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Провал.", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(context, "Successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Успешно добавлено!", Toast.LENGTH_SHORT).show();
         }
     }
     Cursor readAllData(){
@@ -76,18 +76,18 @@ public class MyDatabaseHelperClient extends SQLiteOpenHelper {
 
         long result = db.update(TABLE_NAME, cv, COLUMN_ID + "=?", new String[]{row_id});
         if(result == -1){
-            Toast.makeText(context, "Failed to Update", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Провал обновления данных.", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context, "Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Успешное обновление!", Toast.LENGTH_SHORT).show();
         }
     }
     void deleteOneRow(String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
         if(result == -1){
-            Toast.makeText(context, "Failed to DELETE", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Провал удаление данных.", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context, "Successfully DELETED", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Успешное удаление!", Toast.LENGTH_SHORT).show();
         }
     }
     public Cursor searchClient(String query) {

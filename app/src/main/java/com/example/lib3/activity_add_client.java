@@ -77,7 +77,7 @@ public class activity_add_client extends AppCompatActivity {
 
         Cursor cursor = myDB.searchClient(searchText);
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No matching data found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Данные не найдены.", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
                 searchedClientId.add(cursor.getString(0));
@@ -91,10 +91,10 @@ public class activity_add_client extends AppCompatActivity {
         }
 
         // Если строка поиска пуста, показываем все данные
-        if (searchText.isEmpty()) {
-            storeDataInArraysClients();
-            customAdapterClients.updateData(client_id, name_client, date_of_birth, client_email);
-        }
+        //if (searchText.isEmpty()) {
+           // storeDataInArraysClients();
+           // customAdapterClients.updateData(client_id, name_client, date_of_birth, client_email);
+       // }
     }
 
     @Override
@@ -109,7 +109,7 @@ public class activity_add_client extends AppCompatActivity {
     void storeDataInArraysClients() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Нет данных.", Toast.LENGTH_SHORT).show();
         } else {
             clearDataInArraysClients(); // Очищаем списки перед обновлением данных
             while(cursor.moveToNext()){

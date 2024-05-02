@@ -78,7 +78,7 @@ public class addBook extends AppCompatActivity {
 
         Cursor cursor = myDB.searchData(searchText);
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No matching data found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Данные не найдены.", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
                 searchedBookId.add(cursor.getString(0));
@@ -103,7 +103,7 @@ public class addBook extends AppCompatActivity {
     void storeDataInArrays() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Нет данных.", Toast.LENGTH_SHORT).show();
         } else {
             book_id.clear(); // Очищаем списки перед обновлением данных
             book_title.clear();
@@ -135,9 +135,9 @@ public class addBook extends AppCompatActivity {
 
     void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete All");
-        builder.setMessage("Are you sure you want to delete all ?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setTitle("Удалить все");
+        builder.setMessage("Вы уверены, что хотите удалить все?");
+        builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(addBook.this);
@@ -145,7 +145,7 @@ public class addBook extends AppCompatActivity {
                 recreate();
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Отмена удаления
