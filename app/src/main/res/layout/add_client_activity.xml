@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddClientActivity">
+    tools:context=".AddClientActivity"
+    android:background="#FFF4B3">
 
 
     <EditText
@@ -16,6 +17,7 @@
         android:hint="ФИО"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +31,7 @@
         android:hint="Дата Рождения"
         android:inputType="date"
         android:minHeight="48dp"
+        android:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_input" />
@@ -42,6 +45,7 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
+        android:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_input" />
@@ -51,8 +55,10 @@
         android:layout_width="351dp"
         android:layout_height="64dp"
         android:layout_marginTop="40dp"
-        android:text="Add"
+        android:textSize="20sp"
+        android:text="Добавить"
         android:textAllCaps="false"
+        android:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_input" />

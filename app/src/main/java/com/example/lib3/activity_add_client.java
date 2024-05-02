@@ -26,6 +26,7 @@ public class activity_add_client extends AppCompatActivity {
     MyDatabaseHelperClient myDB;
     ArrayList<String> client_id, name_client, date_of_birth, client_email;
     CustomAdapterClients customAdapterClients;
+    private static final int ADD_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class activity_add_client extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity_add_client.this, AddClientActivity.class);
-                startActivity(intent); // Запускаем AddClientActivity с возможностью получить результат
+                startActivityForResult(intent, ADD_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -97,18 +98,20 @@ public class activity_add_client extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1) { // Проверяем, что результат получен успешно
-            recreate();
+        if (requestCode == ADD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            storeDataInArraysClients(); // Обновляем данные после добавления книги
+            customAdapterClients.notifyDataSetChanged(); // Уведомляем адаптер о изменениях
         }
     }
 
-    void storeDataInArraysClients(){
+    void storeDataInArraysClients() {
         Cursor cursor = myDB.readAllData();
-        if(cursor.getCount() == 0){
+        if (cursor.getCount() == 0) {
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         } else {
+            clearDataInArraysClients(); // Очищаем списки перед обновлением данных
             while(cursor.moveToNext()){
                 client_id.add(cursor.getString(0));
                 name_client.add(cursor.getString(1));
@@ -119,5 +122,12 @@ public class activity_add_client extends AppCompatActivity {
         }
     }
 
+    // Метод для очистки списков клиентов
+    void clearDataInArraysClients() {
+        client_id.clear();
+        name_client.clear();
+        date_of_birth.clear();
+        client_email.clear();
+    }
 }
 

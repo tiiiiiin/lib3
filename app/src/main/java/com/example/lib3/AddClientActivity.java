@@ -2,6 +2,8 @@ package com.example.lib3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,12 @@ public class AddClientActivity extends AppCompatActivity {
                 myDB.addClient(name_input.getText().toString().trim(),
                         date_input.getText().toString().trim(),
                         email_input.getText().toString().trim());
+
+                // Уведомляем предыдущую активность об успешном добавлении клиента
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                // Закрываем текущую активность
+                finish();
             }
         });
     }
