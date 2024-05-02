@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/mainLayoutClient">
 
 
@@ -23,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="#000"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/client_id_txt"
                 app:layout_constraintTop_toTopOf="@+id/client_id_txt"
-                tools:layout_editor_absoluteY="0dp" />
+                 />
 
             <TextView
                 android:id="@+id/date_of_birth_txt"
