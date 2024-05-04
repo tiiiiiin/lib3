@@ -40,6 +40,7 @@
         android:layout_marginHorizontal="60sp"
         android:layout_marginTop="130sp"
         android:ems="10"
+        android:onClick="going"
         android:layout_below="@+id/readers"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/going_btn"

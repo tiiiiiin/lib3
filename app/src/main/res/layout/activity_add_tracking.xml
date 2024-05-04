@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF4B3"
+    android:padding="30dp"
+    tools:context=".add_tracking_activity">
+
+    <!-- Поле для ввода названия книги -->
+    <AutoCompleteTextView
+        android:id="@+id/book_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:ems="10"
+        android:hint="Название книги"
+        android:inputType="text"
+        android:fontFamily="@font/montserrat_bold"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Поле для ввода ФИО читателя -->
+    <AutoCompleteTextView
+        android:id="@+id/reader_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="ФИО читателя"
+        android:fontFamily="@font/montserrat_bold"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/book_input" />
+
+    <!-- Поле для ввода количества книг -->
+    <EditText
+        android:id="@+id/count_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Количество книг"
+        android:fontFamily="@font/montserrat_bold"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reader_input" />
+
+    <!-- Поле для ввода даты выдачи -->
+    <EditText
+        android:id="@+id/borrow_date_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Дата выдачи (гггг-мм-дд)"
+        android:fontFamily="@font/montserrat_bold"
+        android:inputType="date"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/count_input" />
+
+    <!-- Поле для ввода даты возврата -->
+    <EditText
+        android:id="@+id/return_date_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Дата возврата (гггг-мм-дд)"
+        android:fontFamily="@font/montserrat_bold"
+        android:inputType="date"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/borrow_date_input" />
+
+    <!-- Кнопка для добавления новой записи -->
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="351dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="20sp"
+        android:text="Добавить"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/return_date_input" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,4 +22,9 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = new Intent( this, activity_add_client.class);
         startActivity(intent);
     }
+    public void going(View view){
+        Intent intent = new Intent(this, TrackingActivity.class);
+        startActivity(intent);
+    }
+
 }
