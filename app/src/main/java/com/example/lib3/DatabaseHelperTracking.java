@@ -54,10 +54,9 @@ public class DatabaseHelperTracking extends SQLiteOpenHelper{
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
 
-    public Cursor searchData(String query) {
+    public boolean deleteIssuedBook(String bookId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {COL_1, COL_2, COL_3, COL_4, COL_5, COL_6};
-        String selection = COL_2 + " LIKE '%" + query + "%' OR " + COL_3 + " LIKE '%" + query + "%'";
-        return db.query(TABLE_NAME, columns, selection, null, null, null, null);
+        int deletedRows = db.delete(TABLE_NAME, COL_1 + "=?", new String[]{bookId});
+        return deletedRows > 0;
     }
 }

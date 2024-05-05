@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,13 +17,20 @@ import java.util.ArrayList;
 
 public class CustomAdapterTracking extends RecyclerView.Adapter<CustomAdapterTracking.MyViewHolder> {
     private Context context;
-    Activity activity;
+    private Activity activity;
     private ArrayList<String> bookIds, bookTitles, readerNames, bookCounts, borrowDates, returnDates;
 
-    CustomAdapterTracking(Activity activity, Context context, ArrayList<String> bookIds,
-                          ArrayList<String> bookTitles, ArrayList<String> readerNames,
-                          ArrayList<String> bookCounts, ArrayList<String> borrowDates,
-                          ArrayList<String> returnDates) {
+    // Интерфейс для обработки кликов
+    public interface OnItemClickListener {
+        void onItemClick(String bookId, String bookTitle, String readerName, String bookCount, String borrowDate, String returnDate);
+    }
+
+    private OnItemClickListener listener;
+
+    public CustomAdapterTracking(Activity activity, Context context, ArrayList<String> bookIds,
+                                 ArrayList<String> bookTitles, ArrayList<String> readerNames,
+                                 ArrayList<String> bookCounts, ArrayList<String> borrowDates,
+                                 ArrayList<String> returnDates, OnItemClickListener listener) {
         this.activity = activity;
         this.context = context;
         this.bookIds = bookIds;
@@ -31,42 +39,19 @@ public class CustomAdapterTracking extends RecyclerView.Adapter<CustomAdapterTra
         this.bookCounts = bookCounts;
         this.borrowDates = borrowDates;
         this.returnDates = returnDates;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.my_row_tracking, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_row_tracking, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        holder.bookIdTxt.setText(bookIds.get(position));
-        holder.bookTitleTxt.setText(bookTitles.get(position));
-        holder.readerNameTxt.setText(readerNames.get(position));
-        holder.bookCountTxt.setText(bookCounts.get(position));
-        holder.borrowDateTxt.setText(borrowDates.get(position));
-        holder.returnDateTxt.setText(returnDates.get(position));
-
-        holder.mainLayoutIssuedBooks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int clickedPosition = holder.getAdapterPosition();
-                if (clickedPosition != RecyclerView.NO_POSITION) {
-                    // Передаем данные в активити для редактирования
-                    Intent intent = new Intent(context, UpdateBookActivity.class);
-                    intent.putExtra("id", bookIds.get(clickedPosition));
-                    intent.putExtra("title", bookTitles.get(clickedPosition));
-                    intent.putExtra("reader", readerNames.get(clickedPosition));
-                    intent.putExtra("count", bookCounts.get(clickedPosition));
-                    intent.putExtra("borrowDate", borrowDates.get(clickedPosition));
-                    intent.putExtra("returnDate", returnDates.get(clickedPosition));
-                    activity.startActivityForResult(intent, 1);
-                }
-            }
-        });
+        holder.bind(position);
     }
 
     @Override
@@ -74,7 +59,7 @@ public class CustomAdapterTracking extends RecyclerView.Adapter<CustomAdapterTra
         return bookIds.size();
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         TextView bookIdTxt, bookTitleTxt, readerNameTxt, bookCountTxt, borrowDateTxt, returnDateTxt;
         LinearLayout mainLayoutIssuedBooks;
 
@@ -87,11 +72,41 @@ public class CustomAdapterTracking extends RecyclerView.Adapter<CustomAdapterTra
             borrowDateTxt = itemView.findViewById(R.id.borrow_date_txt);
             returnDateTxt = itemView.findViewById(R.id.return_date_txt);
             mainLayoutIssuedBooks = itemView.findViewById(R.id.mainLayoutIssuedBooks);
+
+            // Добавляем обработчик клика
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int clickedPosition = getAdapterPosition();
+                    if (clickedPosition != RecyclerView.NO_POSITION && listener != null) {
+                        // Получаем данные о выбранной книге
+                        String bookId = bookIds.get(clickedPosition);
+                        String bookTitle = bookTitles.get(clickedPosition);
+                        String readerName = readerNames.get(clickedPosition);
+                        String bookCount = bookCounts.get(clickedPosition);
+                        String borrowDate = borrowDates.get(clickedPosition);
+                        String returnDate = returnDates.get(clickedPosition);
+
+                        // Вызываем метод обработки клика из интерфейса
+                        listener.onItemClick(bookId, bookTitle, readerName, bookCount, borrowDate, returnDate);
+                    }
+                }
+            });
+        }
+
+        void bind(int position) {
+            bookIdTxt.setText(bookIds.get(position));
+            bookTitleTxt.setText(bookTitles.get(position));
+            readerNameTxt.setText(readerNames.get(position));
+            bookCountTxt.setText(bookCounts.get(position));
+            borrowDateTxt.setText(borrowDates.get(position));
+            returnDateTxt.setText(returnDates.get(position));
         }
     }
 
-    public void updateData(ArrayList<String> bookIds, ArrayList<String> bookTitles, ArrayList<String> readerNames,
-                           ArrayList<String> bookCounts, ArrayList<String> borrowDates, ArrayList<String> returnDates) {
+    public void updateData(ArrayList<String> bookIds, ArrayList<String> bookTitles,
+                           ArrayList<String> readerNames, ArrayList<String> bookCounts,
+                           ArrayList<String> borrowDates, ArrayList<String> returnDates) {
         this.bookIds.clear();
         this.bookTitles.clear();
         this.readerNames.clear();
@@ -107,6 +122,16 @@ public class CustomAdapterTracking extends RecyclerView.Adapter<CustomAdapterTra
         this.returnDates.addAll(returnDates);
 
         notifyDataSetChanged();
+    }
+
+    public void removeItem(int position) {
+        bookIds.remove(position);
+        bookTitles.remove(position);
+        readerNames.remove(position);
+        bookCounts.remove(position);
+        borrowDates.remove(position);
+        returnDates.remove(position);
+        notifyItemRemoved(position);
     }
 }
 

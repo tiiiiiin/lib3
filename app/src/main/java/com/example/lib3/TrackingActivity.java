@@ -1,9 +1,11 @@
 package com.example.lib3;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -18,11 +20,12 @@ import java.util.ArrayList;
 
 public class TrackingActivity extends AppCompatActivity {
     RecyclerView recyclerViewIssuedBooks;
-    CustomAdapterTracking customAdapterTracking;
+    FloatingActionButton add_button;
     DatabaseHelperTracking myDB;
     EditText searchEditText;
-    FloatingActionButton add_button;
     Button searchButton;
+    CustomAdapterTracking customAdapterTracking;
+
     private static final int ADD_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
@@ -52,9 +55,14 @@ public class TrackingActivity extends AppCompatActivity {
 
         storeDataInArrays(bookIds, bookTitles, readerNames, bookCounts, borrowDates, returnDates);
 
-        customAdapterTracking = new CustomAdapterTracking(this, this, bookIds, bookTitles, readerNames, bookCounts, borrowDates, returnDates);
+        customAdapterTracking = new CustomAdapterTracking(this, this, bookIds, bookTitles, readerNames, bookCounts, borrowDates, returnDates, new CustomAdapterTracking.OnItemClickListener() {
+            @Override
+            public void onItemClick(String bookId, String bookTitle, String readerName, String bookCount, String borrowDate, String returnDate) {
+
+            }
+        });
         recyclerViewIssuedBooks.setAdapter(customAdapterTracking);
-        recyclerViewIssuedBooks.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewIssuedBooks.setLayoutManager(new LinearLayoutManager(TrackingActivity.this));
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +70,33 @@ public class TrackingActivity extends AppCompatActivity {
                 performSearch();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // Если результат ОК, обновляем список выданных книг
+                updateIssuedBooksList();
+            }
+        }
+    }
+
+    // Метод для обновления списка выданных книг
+    private void updateIssuedBooksList() {
+        ArrayList<String> bookIds = new ArrayList<>();
+        ArrayList<String> bookTitles = new ArrayList<>();
+        ArrayList<String> readerNames = new ArrayList<>();
+        ArrayList<String> bookCounts = new ArrayList<>();
+        ArrayList<String> borrowDates = new ArrayList<>();
+        ArrayList<String> returnDates = new ArrayList<>();
+
+        storeDataInArrays(bookIds, bookTitles, readerNames, bookCounts, borrowDates, returnDates);
+
+        customAdapterTracking.updateData(bookIds, bookTitles, readerNames, bookCounts, borrowDates, returnDates);
+        // Добавляем эту строку для обновления RecyclerView
+        customAdapterTracking.notifyDataSetChanged();
     }
 
     private void performSearch() {
