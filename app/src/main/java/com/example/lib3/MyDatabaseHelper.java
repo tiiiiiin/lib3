@@ -63,7 +63,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery(query, null);
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
     }
 
     void updateData(String row_id, String title, String author, String count) {

@@ -124,33 +124,33 @@ public class addBook extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.delete_all) {
-            confirmDialog();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    //@Override
+    // public boolean onOptionsItemSelected(MenuItem item) {
+       // if (item.getItemId() == R.id.delete_all) {
+            //confirmDialog();
+            //return true;
+       // }
+        //return super.onOptionsItemSelected(item);
+    //}
 
-    void confirmDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Удалить все");
-        builder.setMessage("Вы уверены, что хотите удалить все?");
-        builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                MyDatabaseHelper myDB = new MyDatabaseHelper(addBook.this);
-                myDB.deleteAllData();
-                recreate();
-            }
-        });
-        builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+    //void confirmDialog() {
+        //AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //builder.setTitle("Удалить все");
+        //builder.setMessage("Вы уверены, что хотите удалить все?");
+        //builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            //@Override
+            //public void onClick(DialogInterface dialogInterface, int i) {
+               // MyDatabaseHelper myDB = new MyDatabaseHelper(addBook.this);
+               // myDB.deleteAllData();
+               //recreate();
+           // }
+       // });
+        //builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+            //@Override
+           // public void onClick(DialogInterface dialogInterface, int i) {
                 // Отмена удаления
-            }
-        });
-        builder.create().show();
-    }
+           // }
+        //});
+        //builder.create().show();
+    //}
 }

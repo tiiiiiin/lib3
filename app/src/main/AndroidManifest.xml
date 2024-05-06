@@ -15,7 +15,7 @@
         <activity
             android:name=".add_tracking_activity"
             android:exported="false"
-            android:parentActivityName=".TrackingActivity"/>
+            android:parentActivityName=".TrackingActivity" />
         <activity
             android:name=".TrackingActivity"
             android:exported="false" />

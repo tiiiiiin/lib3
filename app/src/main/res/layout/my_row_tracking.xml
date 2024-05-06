@@ -18,6 +18,19 @@
             android:background="#FFEF99">
 
             <!-- Поле для названия книги -->
+
+            <TextView
+                android:id="@+id/book_id_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="#A3002D"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Поле для названия книги -->
             <TextView
                 android:id="@+id/book_title_txt"
                 android:layout_width="wrap_content"
@@ -27,7 +40,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/book_id_txt" />
 
             <!-- Поле для ФИО читателя -->
             <TextView
@@ -43,18 +56,18 @@
                 app:layout_constraintTop_toBottomOf="@id/book_title_txt" />
 
             <!-- Поле для количества книг -->
-            <TextView
-                android:id="@+id/book_count_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Количество"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/reader_name_txt"
-                app:layout_constraintTop_toBottomOf="@id/reader_name_txt" />
+            <!--<TextView
+               android:id="@+id/book_count_txt"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               android:text="Количество"
+               android:textSize="18sp"
+               android:textStyle="bold"
+               app:layout_constraintStart_toStartOf="@id/reader_name_txt"
+               app:layout_constraintTop_toBottomOf="@id/reader_name_txt" /> -->
 
-            <!-- Поле для даты выдачи -->
+           <!-- Поле для даты выдачи -->
             <TextView
                 android:id="@+id/borrow_date_txt"
                 android:layout_width="wrap_content"
@@ -63,8 +76,8 @@
                 android:text="Дата выдачи"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/book_count_txt"
-                app:layout_constraintTop_toBottomOf="@id/book_count_txt" />
+                app:layout_constraintStart_toStartOf="@id/reader_name_txt"
+                app:layout_constraintTop_toBottomOf="@id/reader_name_txt" />
 
             <!-- Поле для даты возврата -->
             <TextView
