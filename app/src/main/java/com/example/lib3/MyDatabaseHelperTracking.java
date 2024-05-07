@@ -71,8 +71,23 @@ public class MyDatabaseHelperTracking extends SQLiteOpenHelper {
         return cursor;
     }
 
-    //public Cursor getAllIssuedBooks() {
-        //SQLiteDatabase db = this.getReadableDatabase();
-        //return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-    //}
+    void deleteOneRowTracking(String row_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context, "Провал.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Книга возвращена!", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public Cursor searchTracking(String query) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {COLUMN_ID, COLUMN_BOOK_TITLE, COLUMN_READER_NAME, COLUMN_BORROW_DATE, COLUMN_RETURN_DATE};
+        String selection = COLUMN_BOOK_TITLE + " LIKE '%" + query + "%' OR " + COLUMN_READER_NAME +
+                " LIKE '%" + query + "%' OR " + COLUMN_RETURN_DATE + " LIKE '%" + query + "%'";
+        Cursor cursor = db.query(TABLE_NAME, columns, selection, null, null, null, null);
+        return cursor;
+    }
+
+
 }

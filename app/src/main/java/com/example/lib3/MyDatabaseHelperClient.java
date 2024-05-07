@@ -99,4 +99,18 @@ public class MyDatabaseHelperClient extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
     }
+
+    public ArrayList<String> getClientSuggestions() {
+        ArrayList<String> suggestions = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_NAME + " FROM " + TABLE_NAME, null);
+        if (cursor.moveToFirst()) {
+            do {
+                suggestions.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return suggestions;
+    }
 }

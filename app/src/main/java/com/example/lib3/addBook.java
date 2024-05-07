@@ -66,7 +66,6 @@ public class addBook extends AppCompatActivity {
             }
         });
     }
-
     private void performSearch() {
         EditText searchEditText = findViewById(R.id.search_edit_text);
         String searchText = searchEditText.getText().toString();
@@ -90,16 +89,14 @@ public class addBook extends AppCompatActivity {
             Log.d("SearchActivity", "Search results: " + searchedBookTitle.toString());
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            storeDataInArrays(); // Обновляем данные после добавления книги
-            customAdapter.notifyDataSetChanged(); // Уведомляем адаптер о изменениях
+            storeDataInArrays();
+            customAdapter.notifyDataSetChanged();
         }
     }
-
     void storeDataInArrays() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {
@@ -117,40 +114,9 @@ public class addBook extends AppCompatActivity {
             }
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.my_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
-    //@Override
-    // public boolean onOptionsItemSelected(MenuItem item) {
-       // if (item.getItemId() == R.id.delete_all) {
-            //confirmDialog();
-            //return true;
-       // }
-        //return super.onOptionsItemSelected(item);
-    //}
-
-    //void confirmDialog() {
-        //AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //builder.setTitle("Удалить все");
-        //builder.setMessage("Вы уверены, что хотите удалить все?");
-        //builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
-            //@Override
-            //public void onClick(DialogInterface dialogInterface, int i) {
-               // MyDatabaseHelper myDB = new MyDatabaseHelper(addBook.this);
-               // myDB.deleteAllData();
-               //recreate();
-           // }
-       // });
-        //builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-            //@Override
-           // public void onClick(DialogInterface dialogInterface, int i) {
-                // Отмена удаления
-           // }
-        //});
-        //builder.create().show();
-    //}
 }

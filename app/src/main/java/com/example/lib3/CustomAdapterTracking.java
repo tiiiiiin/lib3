@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class CustomAdapterTracking extends RecyclerView.Adapter<CustomAdapterTracking.MyViewHolder> {
     Context context;
     ArrayList<String> book_id, book_title, reader_name, borrow_date, return_date;
+    OnItemClickListener listener;
 
     CustomAdapterTracking(Context context,
                           ArrayList<String> book_id, ArrayList<String> book_title, ArrayList<String> reader_name,
@@ -37,12 +38,20 @@ public class CustomAdapterTracking extends RecyclerView.Adapter<CustomAdapterTra
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.book_id_txt.setText(String.valueOf(book_id.get(position)));
         holder.book_title_txt.setText(String.valueOf(book_title.get(position)));
         holder.reader_name_txt.setText(String.valueOf(reader_name.get(position)));
         holder.borrow_date_txt.setText(String.valueOf(borrow_date.get(position)));
         holder.return_date_txt.setText(String.valueOf(return_date.get(position)));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -62,5 +71,28 @@ public class CustomAdapterTracking extends RecyclerView.Adapter<CustomAdapterTra
             borrow_date_txt = itemView.findViewById(R.id.borrow_date_txt);
             return_date_txt = itemView.findViewById(R.id.return_date_txt);
         }
+    }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    // Метод для установки слушателя кликов
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+    public void updateData(ArrayList<String> ids, ArrayList<String> book, ArrayList<String> reader, ArrayList<String> borrow, ArrayList<String> returnd) {
+        this.book_id.clear();
+        this.book_title.clear();
+        this.reader_name.clear();
+        this.borrow_date.clear();
+        this.return_date.clear();
+
+        this.book_id.addAll(ids);
+        this.book_title.addAll(book);
+        this.reader_name.addAll(reader);
+        this.borrow_date.addAll(borrow);
+        this.return_date.addAll(returnd);
+
+        notifyDataSetChanged();
     }
 }

@@ -101,4 +101,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String selection = COLUMN_TITLE + " LIKE '%" + query + "%' OR " + COLUMN_AUTHOR + " LIKE '%" + query + "%'";
         return db.query(TABLE_NAME, columns, selection, null, null, null, null);
     }
+
+    public ArrayList<String> getBookSuggestions() {
+        ArrayList<String> suggestions = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_TITLE + " FROM " + TABLE_NAME, null);
+        if (cursor.moveToFirst()) {
+            do {
+                suggestions.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return suggestions;
+    }
 }
