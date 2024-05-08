@@ -55,7 +55,7 @@
 
     <EditText
         android:id="@+id/user_field"
-        android:layout_width="370dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/authorize"
         android:layout_marginHorizontal="50sp"
@@ -70,11 +70,11 @@
 
     <Button
         android:id="@+id/trans_btn"
-        android:layout_width="190dp"
-        android:layout_height="79dp"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/user_field"
         android:layout_marginHorizontal="130dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="25dp"
         android:onClick="trans_btn"
         android:text="@string/trans_btn"
         android:textAlignment="center"
