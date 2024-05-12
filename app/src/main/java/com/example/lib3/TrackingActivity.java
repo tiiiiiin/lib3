@@ -1,6 +1,7 @@
 package com.example.lib3;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -102,14 +103,28 @@ public class TrackingActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            storeDataInArraysTracking();
+            customAdapterTracking.notifyDataSetChanged();
+        }
+    }
 
     // Загрузка данных из базы данных
     void storeDataInArraysTracking() {
+        book_id.clear();
+        book_title.clear();
+        reader_name.clear();
+        borrow_date.clear();
+        return_date.clear();
+
         Cursor cursor = myDB.readAllDataTracking();
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "Нет данных.", Toast.LENGTH_SHORT).show();
         } else {
-            while(cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 book_id.add(cursor.getString(0));
                 book_title.add(cursor.getString(1));
                 reader_name.add(cursor.getString(2));

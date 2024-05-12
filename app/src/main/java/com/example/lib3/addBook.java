@@ -30,6 +30,7 @@ public class addBook extends AppCompatActivity {
     ArrayList<String> book_id, book_title, book_author, book_count;
     CustomAdapter customAdapter;
     private static final int ADD_ACTIVITY_REQUEST_CODE = 1;
+    //public static final int RESULT_DELETED = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +93,19 @@ public class addBook extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            storeDataInArrays();
-            customAdapter.notifyDataSetChanged();
+        if (requestCode == ADD_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // После добавления или обновления новых данных, обновляем список книг
+                storeDataInArrays();
+                customAdapter.notifyDataSetChanged();
+            } else if (resultCode == UpdateBookActivity.RESULT_DELETED) {
+                // Если книга была удалена, обновляем список книг
+                storeDataInArrays();
+                customAdapter.notifyDataSetChanged();
+            }
         }
     }
+
     void storeDataInArrays() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {

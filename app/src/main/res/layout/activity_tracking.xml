@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Книга или Читатель"
+        android:hint="Книга, Читатель или Дата"
         android:imeOptions="actionSearch"
         android:fontFamily="@font/montserrat_bold"
         android:inputType="text"
@@ -20,7 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Поиск кнопка -->
     <Button
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
@@ -30,8 +29,6 @@
         android:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- RecyclerView для отображения списка выданных книг -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewIssuedBooks"
         android:layout_width="0dp"

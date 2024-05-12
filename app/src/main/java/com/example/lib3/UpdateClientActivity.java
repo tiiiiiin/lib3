@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ public class UpdateClientActivity extends AppCompatActivity {
     EditText name_input, date_input, email_input;
     Button update_button, delete_button;
     String id, name, data, email;
+    public static final int RESULT_DELETED = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class UpdateClientActivity extends AppCompatActivity {
                 data = date_input.getText().toString().trim();
                 email = email_input.getText().toString().trim();
                 myDB.updateData(id, name, data, email);
+                updateDataAndFinish();
 
 
             }
@@ -51,7 +54,6 @@ public class UpdateClientActivity extends AppCompatActivity {
             }
         });
     }
-
     void getAndSetIntentData(){
         if(getIntent().hasExtra("id") && getIntent().hasExtra("name") &&
                 getIntent().hasExtra("data") && getIntent().hasExtra("email")){
@@ -68,7 +70,11 @@ public class UpdateClientActivity extends AppCompatActivity {
             Toast.makeText(this, "Нет данных.", Toast.LENGTH_SHORT).show();
         }
     }
-
+    void updateDataAndFinish(){
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        finish();
+    }
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Удалить " + name + " ?");
@@ -78,6 +84,7 @@ public class UpdateClientActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelperClient myDB = new MyDatabaseHelperClient(UpdateClientActivity.this);
                 myDB.deleteOneRow(id);
+                setResult(RESULT_DELETED);
                 finish();
             }
         });

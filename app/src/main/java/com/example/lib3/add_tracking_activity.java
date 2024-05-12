@@ -19,6 +19,7 @@ public class add_tracking_activity extends AppCompatActivity {
     MyDatabaseHelper myDB;
     MyDatabaseHelperClient clientDB;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

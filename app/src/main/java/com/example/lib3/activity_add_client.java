@@ -89,20 +89,21 @@ public class activity_add_client extends AppCompatActivity {
             customAdapterClients.updateData(searchedClientId, searchedClientName, searchedClientDate, searchedClientEmail);
             Log.d("SearchActivity", "Search results: " + searchedClientName.toString()); // Отладочный вывод
         }
-
-        // Если строка поиска пуста, показываем все данные
-        //if (searchText.isEmpty()) {
-           // storeDataInArraysClients();
-           // customAdapterClients.updateData(client_id, name_client, date_of_birth, client_email);
-       // }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            storeDataInArraysClients(); // Обновляем данные после добавления книги
-            customAdapterClients.notifyDataSetChanged(); // Уведомляем адаптер о изменениях
+        if (requestCode == ADD_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // После добавления или обновления новых данных, обновляем список клиентов
+                storeDataInArraysClients();
+                customAdapterClients.notifyDataSetChanged();
+            } else if (resultCode == UpdateClientActivity.RESULT_DELETED) {
+                // Если клиент был удален, обновляем список клиентов
+                storeDataInArraysClients();
+                customAdapterClients.notifyDataSetChanged();
+            }
         }
     }
 
